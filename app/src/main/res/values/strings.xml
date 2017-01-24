@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">WATClass</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="greeting1">Hello Luthfi!</string>
+    <string name="greeting2">How can I help you today?</string>
+    <string name="new_class">New Class</string>
+    <string name="current_term">Current Term</string>
+    <string name="all_terms">View All Terms</string>
+    <string name="stats">Your Stats</string>
+    <string name="grade_calculator">Grade Calculator</string>
+
+    <string name="term">Term</string>
+    <string name="subject">Subject</string>
+    <string name="id">ID</string>
+    <string name="title">Title</string>
+    <string name="instructor">Instructor</string>
+    <string name="lecture">LEC</string>
+    <string name="tutorial">TUT</string>
+
+    <string-array name="terms">
+        <item>Winter</item>
+        <item>Spring</item>
+        <item>Fall</item>
+    </string-array>
+</resources>
