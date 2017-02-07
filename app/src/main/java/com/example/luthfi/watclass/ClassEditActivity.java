@@ -1,13 +1,16 @@
 package com.example.luthfi.watclass;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -36,6 +39,11 @@ public class ClassEditActivity extends AppCompatActivity {
     private EditText instructorEditText;
     private EditText lectureEditText;
     private EditText tutorialEditText;
+
+    private EditText assnEditText;
+    private EditText mid1EditText;
+    private EditText mid2EditText;
+    private EditText finalsEditText;
 
     // Get the term code for the current term.
     public static String currentTerm() {
@@ -202,16 +210,25 @@ public class ClassEditActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_done, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Finish this activity and move back to the previous activity on
-            // the call stack.
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return false;
+        // Handle action bar item clicks here. The action bar will automatically
+        // handle clicks on the Home/Up button, so long as you specify a parent
+        // activity in AndroidManifest.xml
+        int id = item.getItemId();
+
+        if (id == R.id.action_done) {
+            finish();
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
     // Check if the subject and ID fields are empty (if so, don't save the class!)
@@ -239,6 +256,58 @@ public class ClassEditActivity extends AppCompatActivity {
                 lectureEditText.getText().toString());
         values.put(ClassContract.ClassEntry.COLUMN_TUTORIAL,
                 tutorialEditText.getText().toString());
+
+        /*
+        // Get grading scheme.
+        String assnWeight = assnEditText.getText().toString();
+        String mid1Weight = mid1EditText.getText().toString();
+        String mid2Weight = mid2EditText.getText().toString();
+        String finalWeight = finalsEditText.getText().toString();
+
+        int assn = 0;
+        int mid1 = 0;
+        int mid2 = 0;
+        int finals = 0;
+
+/*        boolean allBlank = true;
+
+        if (!assnWeight.isEmpty()) {
+            allBlank = false;
+            assn = Integer.parseInt(assnWeight);
+        }
+        if (!mid1Weight.isEmpty()) {
+            allBlank = false;
+            mid1 = Integer.parseInt(mid1Weight);
+        }
+        if (!mid2Weight.isEmpty()) {
+            allBlank = false;
+            mid2 = Integer.parseInt(mid2Weight);
+        }
+        if (!finalWeight.isEmpty()) {
+            allBlank = false;
+            finals = Integer.parseInt(finalWeight);
+        }
+
+        int sum = assn + mid1 + mid2 + finals;
+
+        if (!allBlank && sum != 100) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("The grading scheme must add up to 100%!")
+                    .setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                        }
+                    });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+        //} else {
+            values.put(ClassContract.ClassEntry.COLUMN_ASSN, assnWeight);
+            values.put(ClassContract.ClassEntry.COLUMN_MID1, mid1Weight);
+            values.put(ClassContract.ClassEntry.COLUMN_MID2, mid2Weight);
+            values.put(ClassContract.ClassEntry.COLUMN_FINAL, finalWeight);
+        //}*/
 
         // Save to current class.
         getContentResolver().update(klass, values, null, null);

@@ -165,10 +165,17 @@ public class TermListActivity extends AppCompatActivity implements
     public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
         Intent intent = new Intent(this, ClassListActivity.class);
         TextView textView = (TextView) view;
-        String termCode = termStringToCode(textView.getText().toString());
-        String action = ClassListActivity.VIEW_TERM + termCode;
-        intent.setAction(action);
-        startActivity(intent);
+        String termCode = null;
+        try {
+            termCode = termStringToCode(textView.getText().toString());
+        } catch (ArrayIndexOutOfBoundsException exn) {
+            exn.printStackTrace();
+            termCode = ClassEditActivity.currentTerm();
+        } finally {
+            String action = ClassListActivity.VIEW_TERM + termCode;
+            intent.setAction(action);
+            startActivity(intent);
+        }
     }
 
     @Override

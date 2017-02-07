@@ -1,188 +1,336 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_width="match_parent">
 
-    <include layout="@layout/toolbar" />
-
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/toolbar"
+        android:minHeight="?android:attr/actionBarSize"
+        android:background="?android:attr/colorPrimary"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        tools:showIn="@layout/content_main">
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_below="@id/toolbar"
         android:layout_height="match_parent"
-        android:padding="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/term_textview"
-            android:text="@string/term"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="4dp"/>
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/term_spinner"
-            android:layout_below="@+id/term_textview"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:layout_marginRight="4dp"/>
-
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/year_spinner"
-            android:layout_below="@id/term_textview"
-            android:layout_toEndOf="@id/term_spinner"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"/>
+        android:layout_width="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/subject_textview_layout"
-            android:layout_below="@id/term_spinner"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/term_textview"
+                    android:text="@string/term"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="4dp"/>
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/term_spinner"
+                    android:layout_below="@+id/term_textview"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginRight="4dp"/>
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/year_spinner"
+                    android:layout_below="@id/term_textview"
+                    android:layout_toEndOf="@id/term_spinner"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/subject_textview_layout"
+                    android:layout_below="@id/term_spinner"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/subject_textview"
+                        android:text="@string/subject"
+                        android:layout_weight="0.91"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/id_textview"
+                        android:text="@string/id"
+                        android:layout_weight="1.00"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/subject_edittext_layout"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/subject_textview_layout"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp">
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/subject_edittext"
+                        android:inputType="text"
+                        android:layout_weight="1"
+                        android:ems="10"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/id_edittext"
+                        android:layout_marginLeft="4dp"
+                        android:inputType="text"
+                        android:layout_weight="1"
+                        android:ems="10"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/title_textview"
+                    android:text="@string/title"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/subject_edittext_layout"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/title_edittext"
+                    android:inputType="text"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/title_textview"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/instructor_textview"
+                    android:text="@string/instructor"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/title_edittext"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/instructor_edittext"
+                    android:inputType="text"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/instructor_textview"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/section_textview_layout"
+                    android:layout_below="@id/instructor_edittext"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lecture_textview"
+                        android:text="@string/lecture"
+                        android:layout_weight="1.02"
+                        android:ems="10"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tutorial_textview"
+                        android:text="@string/tutorial"
+                        android:layout_marginLeft="4dp"
+                        android:layout_weight="1.00"
+                        android:ems="10"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/section_edittext_layout"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/section_textview_layout"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp">
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lecture_edittext"
+                        android:inputType="text"
+                        android:layout_weight="1"
+                        android:ems="10"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tutorial_edittext"
+                        android:inputType="text"
+                        android:layout_marginLeft="4dp"
+                        android:layout_weight="1"
+                        android:ems="10"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/grading_textview"
+                    android:text="@string/grading"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/section_edittext_layout"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"/>
+
+                <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/subject_textview"
-                android:text="@string/subject"
-                android:layout_weight="0.91"/>
+                android:id="@+id/assn_layout"
+                android:orientation="horizontal"
+                android:layout_below="@id/grading_textview"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/id_textview"
-                android:text="@string/id"
-                android:layout_weight="1.00"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/assn_textview"
+                        android:text="@string/assns"
+                        android:layout_weight="1"
+                        android:ems="10"/>
 
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/assn_edittext"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:layout_marginLeft="4dp"
+                        android:inputType="numberDecimal"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mid1_layout"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/assn_layout"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mid1_textview"
+                        android:text="@string/mid1"
+                        android:layout_weight="1"
+                        android:ems="10"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mid1_edittext"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:layout_marginLeft="4dp"
+                        android:inputType="numberDecimal"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mid2_layout"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/mid1_layout"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mid2_textview"
+                        android:text="@string/mid2"
+                        android:layout_weight="1"
+                        android:ems="10"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mid2_edittext"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:layout_marginLeft="4dp"
+                        android:inputType="numberDecimal"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/finals_layout"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/mid2_layout"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/finals_textview"
+                        android:text="@string/finals"
+                        android:layout_weight="1"
+                        android:ems="10"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/finals_edittext"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:layout_marginLeft="4dp"
+                        android:inputType="numberDecimal"/>
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/subject_edittext_layout"
-            android:orientation="horizontal"
-            android:layout_below="@id/subject_textview_layout"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp">
+    </ScrollView>
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/subject_edittext"
-                android:inputType="text"
-                android:layout_weight="1"/>
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/id_edittext"
-                android:inputType="number"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/title_textview"
-            android:text="@string/title"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/subject_edittext_layout"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/title_edittext"
-            android:inputType="text"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/title_textview"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/instructor_textview"
-            android:text="@string/instructor"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/title_edittext"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/instructor_edittext"
-            android:inputType="text"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/instructor_textview"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/section_textview_layout"
-            android:layout_below="@id/instructor_edittext"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/lecture_textview"
-                android:text="@string/lecture"
-                android:layout_weight="1.02"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tutorial_textview"
-                android:text="@string/tutorial"
-                android:layout_weight="1.00"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/section_edittext_layout"
-            android:orientation="horizontal"
-            android:layout_below="@id/section_textview_layout"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp">
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/lecture_edittext"
-                android:inputType="number"
-                android:layout_weight="1"/>
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tutorial_edittext"
-                android:inputType="number"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-
-</LinearLayout>
+</RelativeLayout>

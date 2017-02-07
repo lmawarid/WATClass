@@ -18,6 +18,12 @@
     <string name="lecture">LEC</string>
     <string name="tutorial">TUT</string>
 
+    <string name="grading">Grading</string>
+    <string name="assns">Assignments</string>
+    <string name="mid1">Midterm 1</string>
+    <string name="mid2">Midterm 2</string>
+    <string name="finals">Final Exams</string>
+
     <string-array name="terms">
         <item>Winter</item>
         <item>Spring</item>

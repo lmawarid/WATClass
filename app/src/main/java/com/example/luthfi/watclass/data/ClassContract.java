@@ -45,6 +45,10 @@ public final class ClassContract {
         public static final String COLUMN_LECTURE = "LEC";
         public static final String COLUMN_TUTORIAL = "TUT";
         // COLUMN_TEST yet to be added.
+        public static final String COLUMN_ASSN = "assignments";
+        public static final String COLUMN_MID1 = "midterm 1";
+        public static final String COLUMN_MID2 = "midterm 2";
+        public static final String COLUMN_FINAL = "final exams";
 
         public static final String COLUMN_DATE_MODIFIED = "date modified";
     }

@@ -3,6 +3,7 @@ package com.example.luthfi.watclass.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.DropBoxManager;
 
 /**
  * Created by Luthfi on 14/8/2016.
@@ -32,7 +33,11 @@ public class ClassDBHelper extends SQLiteOpenHelper {
                 + ClassContract.ClassEntry.COLUMN_TITLE + " TEXT NOT NULL,"
                 + ClassContract.ClassEntry.COLUMN_INSTRUCTOR + " TEXT NOT NULL,"
                 + ClassContract.ClassEntry.COLUMN_LECTURE + " INTEGER,"
-                + ClassContract.ClassEntry.COLUMN_TUTORIAL + " INTEGER"
+                + ClassContract.ClassEntry.COLUMN_TUTORIAL + " INTEGER,"
+                + ClassContract.ClassEntry.COLUMN_ASSN + " REAL,"
+                + ClassContract.ClassEntry.COLUMN_MID1 + " REAL,"
+                + ClassContract.ClassEntry.COLUMN_MID2 + " REAL,"
+                + ClassContract.ClassEntry.COLUMN_FINAL + " REAL"
                 + ");";
 
         // Execute command.
@@ -48,7 +53,11 @@ public class ClassDBHelper extends SQLiteOpenHelper {
                 + ClassContract.ClassEntry.COLUMN_TITLE + ","
                 + ClassContract.ClassEntry.COLUMN_INSTRUCTOR + ","
                 + ClassContract.ClassEntry.COLUMN_LECTURE + ","
-                + ClassContract.ClassEntry.COLUMN_TUTORIAL + ")"
+                + ClassContract.ClassEntry.COLUMN_TUTORIAL + ","
+                + ClassContract.ClassEntry.COLUMN_ASSN + ","
+                + ClassContract.ClassEntry.COLUMN_MID1 + ","
+                + ClassContract.ClassEntry.COLUMN_MID2 + ","
+                + ClassContract.ClassEntry.COLUMN_FINAL + ")"
                 + "VALUES(1165,'PD',2,'Critical Reflection & Report Writing',"
                 + "'Jay Dolmage',81,NULL);");
     }
