@@ -10,28 +10,19 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/***
+ * Main activity.
+ */
 public class MainActivity extends AppCompatActivity {
 
-    public void newClass(View view) {
-        // Create a new class upon clicking the new class button.
-        Intent intent = new Intent(this, ClassEditActivity.class);
-        intent.setAction(ClassEditActivity.ACTION_NEW);
-        startActivity(intent);
-    }
+    /***
+     * Lifecycle Methods
+     */
 
-    public void currentTermClasses(View view) {
-        // View current term's classes.
-        Intent intent = new Intent(this, ClassListActivity.class);
-        String viewCurrentTerm = ClassListActivity.VIEW_TERM + ClassEditActivity.currentTerm();
-        intent.setAction(viewCurrentTerm);
-        startActivity(intent);
-    }
-
-    public void viewAllTerms(View view) {
-        Intent intent = new Intent(this, TermListActivity.class);
-        startActivity(intent);
-    }
-
+    /***
+     * Initializes the activity, setting the toolbar.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,5 +51,52 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /***
+     * OnClick Handlers
+     */
+
+    /***
+     * Sends the user to ClassEditActivity to create a new class.
+     * @param view  The current view.
+     */
+    public void newClass(View view) {
+        Intent intent = new Intent(this, ClassEditActivity.class);
+        intent.setAction(ClassEditActivity.ACTION_NEW);
+        startActivity(intent);
+    }
+
+    /***
+     * Sends the user to ClassListActivity, set to the current term.
+     * @param view  The current view.
+     */
+    public void currentTermClasses(View view) {
+        Intent intent = new Intent(this, ClassListActivity.class);
+        String viewCurrentTerm = ClassListActivity.ACTION_VIEW_TERM + ClassEditActivity.currentTerm();
+        intent.setAction(viewCurrentTerm);
+        intent.setFlags(ClassListActivity.FLAG_EDIT_CLASS);
+        startActivity(intent);
+    }
+
+    /***
+     * Sends the user to TermListActivity to view all terms.
+     * @param view  The current view.
+     */
+    public void viewAllTerms(View view) {
+        Intent intent = new Intent(this, TermListActivity.class);
+        intent.setFlags(ClassListActivity.FLAG_EDIT_CLASS);
+        startActivity(intent);
+    }
+
+    /***
+     * Sends the user to TermListActivity, allowing them to pick
+     * the term and class for which they want to calculate final marks.
+     * @param view  The current view.
+     */
+    public void calculateGrade(View view) {
+        Intent intent = new Intent(this, TermListActivity.class);
+        intent.setFlags(ClassListActivity.FLAG_ENTER_GRADE);
+        startActivity(intent);
     }
 }

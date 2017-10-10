@@ -10,7 +10,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/android_book"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
@@ -24,8 +24,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ClassEditActivity"/>
-        <activity android:name=".ClassListActivity"/>
+        <activity
+            android:name=".ClassEditActivity"
+            android:parentActivityName=".ClassListActivity"
+            />
+        <activity android:name=".GradeCalcActivity"/>
+        <activity
+            android:name=".ClassListActivity"
+            android:parentActivityName=".TermListActivity"
+            />
         <activity android:name=".TermListActivity"/>
 
         <provider

@@ -27,6 +27,8 @@ import java.util.ArrayList;
 
 /**
  * Created by Luthfi on 24/8/2016.
+ * This is the activity where users can view their list of classes
+ * for a specific term.
  */
 public class ClassListActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor>,
@@ -34,13 +36,28 @@ public class ClassListActivity extends AppCompatActivity
         View.OnClickListener,
         AdapterView.OnItemClickListener {
 
-    public static final String VIEW_TERM = "view_term_";
-    private static final int TERM_INDEX = 10;
+    /***
+     * Constants
+     */
 
+    /***
+     * Flags to specify action mode - this determines whether clicking
+     * a class will send the user to ClassEditActivity or GradeCalcActivity.
+     */
+    public static final int FLAG_EDIT_CLASS = 0;
+    public static final int FLAG_ENTER_GRADE = 1;
+
+    /***
+     * This is used along with the term code to specify which classes to
+     * show (corresponding to the given term code).
+     */
+    public static final String ACTION_VIEW_TERM = "view_term_";
+
+    // Information for querying the database.
+    private static final int TERM_INDEX = 10;
     private static final int CLASS_LOADER = 1;
     private static final int SUBJECT_COLUMN = 2;
     private static final int ID_COLUMN = 3;
-
     private static final String[] PROJECTION = {
             ClassContract.ClassEntry._ID,
             ClassContract.ClassEntry.COLUMN_TERM,
@@ -48,17 +65,20 @@ public class ClassListActivity extends AppCompatActivity
             ClassContract.ClassEntry.COLUMN_ID,
             ClassContract.ClassEntry.COLUMN_TITLE
     };
+
+    /***
+     * Private Members
+     */
+
+    // Cursor adapter and array of selected IDs for batch deletions.
     private SimpleCursorAdapter adapter;
+    private ArrayList<Long> selectedIDs;
 
-    ArrayList<Long> selectedIDs = new ArrayList<Long>();
+    /***
+     * Private Initialization Methods
+     */
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
-
-        ListView listView = (ListView) findViewById(R.id.listview);
-
+    private void initAdapter() {
         // Parameters to initialize adapter.
         // By default, set the SimpleCursorAdapter to map a class's subject code and title to
         // each view in the ListView.
@@ -87,24 +107,45 @@ public class ClassListActivity extends AppCompatActivity
             }
         });
 
-        // Set adapter to ListView and initialize loader.
-        listView.setAdapter(adapter);
+        // Initialize loader.
         getSupportLoaderManager().initLoader(CLASS_LOADER, null, this);
+    }
 
-        // Initialize toolbar.
+    private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         String termCode = getIntent().getAction().substring(TERM_INDEX);
         toolbar.setTitle(TermListActivity.termCodeToString(termCode));
         setSupportActionBar(toolbar);
+    }
 
-        // Configure ListView.
+    private void initListView() {
+        ListView listView = (ListView) findViewById(R.id.listview);
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(this);
+    }
 
-        // Initialize FAB.
+    private void initFloatingActionButton() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
+    }
+
+    /***
+     * Lifecycle Methods
+     */
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list);
+
+        // Initialize selected IDs.
+        selectedIDs = new ArrayList<>();
+        initAdapter();
+        initToolbar();
+        initListView();
+        initFloatingActionButton();
     }
 
     @Override
@@ -120,11 +161,9 @@ public class ClassListActivity extends AppCompatActivity
         // handle clicks on the Home/Up button, so long as you specify a parent
         // activity in AndroidManifest.xml
         int id = item.getItemId();
-
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -195,7 +234,10 @@ public class ClassListActivity extends AppCompatActivity
         selectedIDs.clear();
     }
 
-    // Creates a new class upon clicking the Floating Action Button.
+    /***
+     * Creates a new class upon clicking the floating action button.
+     * @param view  The current view
+     */
     @Override
     public void onClick(View view) {
         // Creates a new Intent and associates it to this activity.
@@ -206,16 +248,25 @@ public class ClassListActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    // Edit existing classes.
+    /***
+     * Sends the user to ClassEditActivity to modify the clicked class entry.
+     * @param adapterView
+     * @param view
+     * @param pos
+     * @param id
+     */
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
-        // Creates a new Intent and associates it to this activity.
-        Intent intent = new Intent(this, ClassEditActivity.class);
-        // Assign the ID of the current selected note.
-        intent.setData(ContentUris.withAppendedId(ClassContract.ClassEntry.CONTENT_URI, id));
-        // Set intent action to 'edit class'.
-        intent.setAction(ClassEditActivity.ACTION_EDIT);
-        // Start activity.
-        startActivity(intent);
+        final Intent intent = getIntent();
+        if (intent.getFlags() == ClassListActivity.FLAG_EDIT_CLASS) {
+            Intent nextIntent = new Intent(this, ClassEditActivity.class);
+            nextIntent.setData(ContentUris.withAppendedId(ClassContract.ClassEntry.CONTENT_URI, id));
+            nextIntent.setAction(ClassEditActivity.ACTION_EDIT);
+            startActivity(nextIntent);
+        } else if (intent.getFlags() == ClassListActivity.FLAG_ENTER_GRADE) {
+            Intent nextIntent = new Intent(this, GradeCalcActivity.class);
+            nextIntent.setData(ContentUris.withAppendedId(ClassContract.ClassEntry.CONTENT_URI, id));
+            startActivity(nextIntent);
+        }
     }
 }

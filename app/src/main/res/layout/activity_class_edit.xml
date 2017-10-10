@@ -29,6 +29,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/class_edit_relative_layout"
                 android:padding="16dp">
 
                 <TextView
@@ -211,126 +212,89 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/grading_textview"
-                    android:text="@string/grading"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@id/section_edittext_layout"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"/>
-
                 <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/assn_layout"
-                android:orientation="horizontal"
-                android:layout_below="@id/grading_textview"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/grading_header"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_below="@id/section_edittext_layout">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/assn_textview"
-                        android:text="@string/assns"
+                        android:text="@string/grading"
                         android:layout_weight="1"
-                        android:ems="10"/>
+                        android:ems="10"
+                        android:layout_alignParentStart="true"/>
 
-                    <EditText
+
+                    <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/assn_edittext"
+                        android:id="@+id/add_component"
                         android:layout_weight="1"
                         android:ems="10"
                         android:layout_marginLeft="4dp"
-                        android:inputType="numberDecimal"/>
+                        android:text="@string/add_component"
+                        android:onClick="addGradingComponent"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/remove_component"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:text="@string/remove_component"
+                        android:layout_marginLeft="4dp"
+                        android:onClick="removeGradingComponent"/>
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/mid1_layout"
-                    android:orientation="horizontal"
-                    android:layout_below="@id/assn_layout"
+                    android:orientation="vertical"
+                    android:id="@+id/grading_view"
                     android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp">
+                    android:layout_marginBottom="4dp"
+                    android:layout_below="@id/grading_header"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/mid1_textview"
-                        android:text="@string/mid1"
-                        android:layout_weight="1"
-                        android:ems="10"/>
 
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/mid1_edittext"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:layout_marginLeft="4dp"
-                        android:inputType="numberDecimal"/>
-                </LinearLayout>
-
+                <!-- ASSIGNMENT COMPONENT -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/mid2_layout"
+                    android:id="@+id/component0"
                     android:orientation="horizontal"
-                    android:layout_below="@id/mid1_layout"
+                    android:visibility="gone"
+                    android:layout_below="@id/grading_view"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/mid2_textview"
-                        android:text="@string/mid2"
-                        android:layout_weight="1"
-                        android:ems="10"/>
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/mid2_edittext"
+                        android:id="@+id/component0_name"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:layout_marginLeft="4dp"
+                        android:inputType="textAutoComplete"
+                        android:text="@string/assns"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/component0_edittext"
                         android:layout_weight="1"
                         android:ems="10"
                         android:layout_marginLeft="4dp"
                         android:inputType="numberDecimal"/>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/finals_layout"
-                    android:orientation="horizontal"
-                    android:layout_below="@id/mid2_layout"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/finals_textview"
-                        android:text="@string/finals"
-                        android:layout_weight="1"
-                        android:ems="10"/>
-
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/finals_edittext"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:layout_marginLeft="4dp"
-                        android:inputType="numberDecimal"/>
-                </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
-
     </ScrollView>
 
 </RelativeLayout>

@@ -13,24 +13,32 @@ import android.support.annotation.Nullable;
 
 /**
  * Created by Luthfi on 14/8/2016.
+ * This class provides a Content Provider for the UI layer
+ * that retrieves data from the main database.
  */
 public final class ClassProvider extends ContentProvider {
 
+    /***
+     * Constants
+     */
     private static final UriMatcher uriMatcher = buildUriMatcher();
-
     private static final int CLASS = 100;
     private static final int CLASS_ID = 101;
-
-    private ClassDBHelper openHelper;
-
     private static final SQLiteQueryBuilder queryBuilder;
-
     static {
         queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(ClassContract.ClassEntry.TABLE_NAME);
     }
 
-    // Builds the URI matcher for the database.
+    /***
+     * Private
+     */
+    private ClassDBHelper openHelper;
+
+    /***
+     * Creates the URI matcher for the Content Provider.
+     * @return  A URI matcher.
+     */
     private static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = ClassContract.AUTHORITY;
@@ -40,20 +48,30 @@ public final class ClassProvider extends ContentProvider {
         return matcher;
     }
 
-    // On create, initialize the database helper.
+    /***
+     * Creates the Content Provider.
+     */
     @Override
     public boolean onCreate() {
         openHelper = new ClassDBHelper(getContext());
         return true;
     }
 
-    // Query the database.
+    /***
+     * Queries the database.
+     * @param uri
+     * @param projection
+     * @param selection
+     * @param selectionArgs
+     * @param sortOrder
+     * @return
+     */
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         Cursor returnCursor;
-        // Get the database. For queries, we only want it to be readable.
+        // Get the database. For queries, we only want read access.
         SQLiteDatabase database = openHelper.getReadableDatabase();
 
         // Switch on the match code and execute the appropriate query.
@@ -89,7 +107,11 @@ public final class ClassProvider extends ContentProvider {
         return returnCursor;
     }
 
-    // Get the type of the matched URI.
+    /***
+     * Get the type of the matched URI.
+     * @param uri   The URI.
+     * @return      Type of matched URI as String.
+     */
     @Nullable
     @Override
     public String getType(Uri uri) {
@@ -104,7 +126,12 @@ public final class ClassProvider extends ContentProvider {
         }
     }
 
-    // Insert a new class record into the database.
+    /***
+     * Inserts a new tuple into the database.
+     * @param uri               The database URI.
+     * @param contentValues     The values to be inserted.
+     * @return
+     */
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
@@ -136,7 +163,13 @@ public final class ClassProvider extends ContentProvider {
         return returnUri;
     }
 
-    // Delete a class record from the database.
+    /***
+     * Deletes a tuple from the database.
+     * @param uri
+     * @param selection
+     * @param selectionArgs
+     * @return
+     */
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         // Get database with write access for deletion.
@@ -155,8 +188,7 @@ public final class ClassProvider extends ContentProvider {
             case CLASS_ID:
                 rowsDeleted = database.delete(
                         ClassContract.ClassEntry.TABLE_NAME,
-                        ClassContract.ClassEntry._ID + "='"
-                                + ContentUris.parseId(uri) + "'",
+                        ClassContract.ClassEntry._ID + "='" + ContentUris.parseId(uri) + "'",
                         selectionArgs
                 );
                 break;
@@ -172,7 +204,14 @@ public final class ClassProvider extends ContentProvider {
         return rowsDeleted;
     }
 
-    // Update a class record in the database.
+    /***
+     * Updates a tuple (in most cases, a class record) in the database.
+     * @param uri
+     * @param contentValues
+     * @param selection
+     * @param selectionArgs
+     * @return
+     */
     @Override
     public int update(Uri uri, ContentValues contentValues, String selection,
                       String[] selectionArgs) {

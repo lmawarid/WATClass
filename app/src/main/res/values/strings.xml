@@ -8,7 +8,7 @@
     <string name="current_term">Current Term</string>
     <string name="all_terms">View All Terms</string>
     <string name="stats">Your Stats</string>
-    <string name="grade_calculator">Grade Calculator</string>
+    <string name="calc_grade">Calculate Grade</string>
 
     <string name="term">Term</string>
     <string name="subject">Subject</string>
@@ -19,10 +19,12 @@
     <string name="tutorial">TUT</string>
 
     <string name="grading">Grading</string>
+    <string name="add_component">Add</string>
+    <string name="remove_component">Remove</string>
+
     <string name="assns">Assignments</string>
-    <string name="mid1">Midterm 1</string>
-    <string name="mid2">Midterm 2</string>
-    <string name="finals">Final Exams</string>
+    <string name="midterm">Midterm</string>
+    <string name="finals">Final</string>
 
     <string-array name="terms">
         <item>Winter</item>

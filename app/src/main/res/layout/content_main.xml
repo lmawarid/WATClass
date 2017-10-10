@@ -76,20 +76,10 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/stats"
-            android:id="@+id/your_stats_button"
+            android:text="@string/calc_grade"
+            android:id="@+id/grade_calculator"
+            android:onClick="calculateGrade"
             android:layout_below="@id/all_terms_button"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:elevation="2dp"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/grade_calculator"
-            android:id="@+id/grade_calculator_button"
-            android:layout_below="@id/your_stats_button"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"

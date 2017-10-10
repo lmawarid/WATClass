@@ -23,20 +23,34 @@ import com.example.luthfi.watclass.data.ClassContract;
 
 /**
  * Created by Luthfi on 25/8/2016.
+ * This activity shows a list of terms from the classes the
+ * user has stored in the database.
  */
 public class TermListActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>,
         AdapterView.OnItemClickListener,
         View.OnClickListener {
 
+    /***
+     * Constants
+     */
+
     private static final int TERM_LOADER = 2;
     private static final int TERM_COLUMN = 1;
-
     private static final String[] PROJECTION = {
             ClassContract.ClassEntry._ID,
             ClassContract.ClassEntry.COLUMN_TERM
     };
+
+    /***
+     * Private Members
+     */
+
     private SimpleCursorAdapter adapter;
+
+    /***
+     * Static Helper Methods
+     */
 
     public static String termCodeToString(String termCode) {
         String year = "20" + termCode.substring(1, 3);
@@ -78,11 +92,11 @@ public class TermListActivity extends AppCompatActivity implements
         return termCode;
     }
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+    /***
+     * Private Initialization Methods
+     */
 
+    private void initListView() {
         ListView listView = (ListView) findViewById(R.id.listview);
 
         String[] from = new String[] {ClassContract.ClassEntry.COLUMN_TERM};
@@ -105,16 +119,32 @@ public class TermListActivity extends AppCompatActivity implements
         });
 
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
         getSupportLoaderManager().initLoader(TERM_LOADER, null, this);
+    }
 
+    private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("All Terms");
         setSupportActionBar(toolbar);
+    }
 
-        listView.setOnItemClickListener(this);
-
+    private void initFloatingActionButton() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
+    }
+
+    /***
+     * Lifecycle Methods
+     */
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list);
+        initListView();
+        initToolbar();
+        initFloatingActionButton();
     }
 
     @Override
@@ -172,8 +202,9 @@ public class TermListActivity extends AppCompatActivity implements
             exn.printStackTrace();
             termCode = ClassEditActivity.currentTerm();
         } finally {
-            String action = ClassListActivity.VIEW_TERM + termCode;
+            String action = ClassListActivity.ACTION_VIEW_TERM + termCode;
             intent.setAction(action);
+            intent.setFlags(getIntent().getFlags());
             startActivity(intent);
         }
     }
